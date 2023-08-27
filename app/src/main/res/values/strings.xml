@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Online Notes</string>
+    <string name="button">Button</string>
+    <string name="login">Login</string>
+</resources>

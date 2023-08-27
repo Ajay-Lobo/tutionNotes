@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/screen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".MainActivity" >
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="287dp"
+        android:layout_height="412dp"
+        android:background="@drawable/bg_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.579">
+
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="137dp"
+            android:layout_height="68dp"
+            android:layout_marginStart="88dp"
+            android:layout_marginTop="52dp"
+            android:text="@string/login"
+            android:textColor="@color/blue"
+            android:textSize="39sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TextSizeCheck" />
+
+        <EditText
+            android:id="@+id/editTextText"
+            android:layout_width="207dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="USN"
+            android:inputType="text"
+            android:textColor="@color/black"
+            android:textColorHint="#E83F4C51"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.506"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <EditText
+            android:id="@+id/editTextDate"
+            android:layout_width="207dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="Date (YYYY-MM-DD)"
+            android:inputType="textPassword"
+            android:textColor="@color/black"
+            android:textColorHint="#E83F4C51"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.512"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="193dp"
+            android:layout_height="52dp"
+            android:layout_marginBottom="48dp"
+            android:background="@drawable/rounded_button"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="Login"
+            android:textColor="@color/white"
+            android:radius="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.436"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Forgot Password"
+            android:textColor="@color/blue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.26"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextDate"
+            app:layout_constraintVertical_bias="0.204" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
