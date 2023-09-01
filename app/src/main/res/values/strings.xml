@@ -1,7 +1,8 @@
 <resources>
-    <string name="app_name">Online Notes</string>
+    <string name="app_name">Tuition Notes</string>
     <string name="button">Button</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="all">Already Registered?</string>
+    <string name="all2">Don\'t you have an Account?</string>
 </resources>

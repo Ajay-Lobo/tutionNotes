@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
      TextView loginPress;
     Button loginButton;
     Database1 database1;
+    private ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         passwordEditText2 = findViewById(R.id.editTextPass2);
         loginPress = findViewById(R.id.LoginView2);
 
+         progressBar = findViewById(R.id.progressBar);
         loginButton = findViewById(R.id.loginButton);
 //        database calling
         database1 = new Database1(getApplicationContext());
@@ -58,11 +61,22 @@ public class MainActivity extends AppCompatActivity {
                     }
                else {
                         if (database1.registerData(name, username, password)) {
-                            Toast.makeText(getApplicationContext(), "Registered Successfully", Toast.LENGTH_SHORT).show();
-                            navigateToLogin();
+                            progressBar.setVisibility(View.VISIBLE);
+                            new android.os.Handler().postDelayed(
+                                    new Runnable() {
+                                        public void run() {
+
+                                            // Hide the loader after 1 seconds
+                                            progressBar.setVisibility(View.GONE);
+                                            // Navigate to the login page
+                                            navigateToLogin();
+                                        }
+                                    },
+                                    1000 // 1 seconds
+                            );
                         }
                         else{
-                            Toast.makeText(getApplicationContext(), "Registered Failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Registration Failed", Toast.LENGTH_SHORT).show();
                         }
                     }
                     }
