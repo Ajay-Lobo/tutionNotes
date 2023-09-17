@@ -3,5 +3,6 @@
     <style name="Base.Theme.OnlineNotes" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
          <item name="colorPrimary">@color/blue</item>
+<!--        <item name="android:statusBarColor">@color/black</item>-->
     </style>
 </resources>
