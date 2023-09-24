@@ -1,5 +1,6 @@
 package com.example.onlinenotes;
 
+import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -7,45 +8,49 @@ import android.graphics.pdf.PdfRenderer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
-import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import java.io.File;
-import java.io.FileOutputStream;
+
+
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class AddNotes extends AppCompatActivity {
-
-    EditText TitleText,DescriptionText;
-    Button SelectFileButton,ClearButton,UploadButton;
+    private EditText titleText, descriptionText;
+    private Button clearButton, uploadButton,SelectFileButton;
+    private Database1 database1; // Changed variable name for consistency
+    private ProgressBar progressBar;
     ImageView ViewFile;
     TextView FileNameTextView;
     private final int FILE_REQ_CODE = 1000;
-    private Uri selectedFileUri; // Store the URI of the selected file
-
+    private Uri selectedFileUri;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_notes);
 
-        TitleText = findViewById(R.id.titleText);
-        DescriptionText = findViewById(R.id.descriptionText);
+        // Initialize UI elements
+        titleText = findViewById(R.id.titleText);
+        descriptionText = findViewById(R.id.descriptionText);
+        clearButton = findViewById(R.id.clearButton);
+        uploadButton = findViewById(R.id.uploadButton);
+        progressBar = findViewById(R.id.progressBar2);
+
         ViewFile = findViewById(R.id.imageView2);
         SelectFileButton = findViewById(R.id.button5);
         FileNameTextView = findViewById(R.id.file_name_textview);
 
-        ClearButton = findViewById(R.id.clearButton);
-        UploadButton = findViewById(R.id.uploadButton);
-
+        // Initialize the database
+        database1 = new Database1(this);
 
         //select the file from gallery
         SelectFileButton.setOnClickListener(new View.OnClickListener() {
@@ -67,15 +72,14 @@ public class AddNotes extends AppCompatActivity {
             }
         });
 
-        // Set an onClickListener for the "Clear" button
-        ClearButton.setOnClickListener(new View.OnClickListener() {
+        clearButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
                 // Clear the text in the TitleText and DescriptionText EditText fields
-                TitleText.getText().clear();
-                TitleText.setText("Title");
-                DescriptionText.getText().clear();
-                DescriptionText.setText("Description");
+                titleText.getText().clear();
+                titleText.setHint("Title");
+                descriptionText.getText().clear();
+                descriptionText.setHint("Description");
 
                 // Clear the selected file URI and hide the filename TextView
                 selectedFileUri = null;
@@ -89,9 +93,52 @@ public class AddNotes extends AppCompatActivity {
         });
 
 
+        // Set an OnClickListener for the "Upload" button
+        // Set an OnClickListener for the "Upload" button
+        uploadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String title = titleText.getText().toString();
+                String description = descriptionText.getText().toString();
+
+                if (title.length() < 4) {
+                    showToast("Title is too short (minimum 4 characters).");
+                } else if (selectedFileUri != null) {
+                    // Get the file data as a byte array
+                    byte[] fileData = getFileData(selectedFileUri);
+
+                    if (fileData != null) {
+                        Log.d("Debug", "File data retrieved successfully.");
+                        // Attempt to upload data to the database, including the file data as BLOB
+                        boolean uploadSuccessful = database1.uploadData(title, description, fileData);
+
+                        if (uploadSuccessful) {
+                            Log.d("Debug", "Upload successful.");
+                            progressBar.setVisibility(View.VISIBLE);
+                            new android.os.Handler().postDelayed(new Runnable() {
+                                public void run() {
+                                    progressBar.setVisibility(View.GONE);
+                                    navigateToDashboard();
+                                }
+                            }, 3000);
+                        } else {
+                            Log.e("Error", "Upload failed.");
+                            showToast("Upload failed.");
+                        }
+                    } else {
+                        Log.e("Error", "Failed to retrieve file data.");
+                        showToast("Failed to retrieve file data.");
+                    }
+                } else {
+                    Log.e("Error", "No file selected.");
+                    showToast("Please select a file to upload.");
+                }
+            }
+        });
+
+
+// Helper method to convert the selected file's data to a byte array
     }
-
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -125,14 +172,37 @@ public class AddNotes extends AppCompatActivity {
             }
         }
     }
+
+    private byte[] getFileData(Uri fileUri) {
+        try {
+            InputStream inputStream = getContentResolver().openInputStream(fileUri);
+            if (inputStream != null) {
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                byte[] buffer = new byte[1024];
+                int bytesRead;
+                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                    byteArrayOutputStream.write(buffer, 0, bytesRead);
+                }
+                return byteArrayOutputStream.toByteArray();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     private String getFileName(Uri uri) {
         String fileName = null;
         String scheme = uri.getScheme();
         if (scheme != null && scheme.equals("content")) {
             Cursor cursor = getContentResolver().query(uri, null, null, null, null);
-            if (cursor != null && cursor.moveToFirst()) {
-                fileName = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
-                cursor.close();
+            if (cursor != null) {
+                try {
+                    if (cursor.moveToFirst()) {
+                        fileName = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                    }
+                } finally {
+                    cursor.close();
+                }
             }
         }
         if (fileName == null) {
@@ -140,6 +210,7 @@ public class AddNotes extends AppCompatActivity {
         }
         return fileName;
     }
+
 
     private void generatePdfThumbnail(Uri pdfUri) {
         try {
@@ -173,7 +244,13 @@ public class AddNotes extends AppCompatActivity {
             Toast.makeText(this, "Unable to open the file", Toast.LENGTH_SHORT).show();
         }
     }
+    private void navigateToDashboard() {
+        Intent intent = new Intent(AddNotes.this, TeacherDashboard.class);
+        startActivity(intent);
+        finish(); // Finish this activity to prevent going back to it from the dashboard
+    }
 
-
-
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
 }

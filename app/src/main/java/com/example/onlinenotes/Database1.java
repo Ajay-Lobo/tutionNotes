@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -13,6 +14,7 @@ public class Database1 extends SQLiteOpenHelper {
 
     public static final String register = "register";
 
+//    public static final String upload = "upload";
     public Database1(@Nullable Context context) {
         super(context, dbname, null, 1);
     }
@@ -33,6 +35,15 @@ public class Database1 extends SQLiteOpenHelper {
                 "(usn,name, password, role) VALUES " +
                 "('4SO22MC0091', 'harish','123456', 0)"
         );
+
+        sqLiteDatabase.execSQL(
+                "CREATE TABLE IF NOT EXISTS upload (" +
+                        "title TEXT NOT NULL, " +
+                        "description TEXT, " +
+                        "fileData BLOB" +  // Add the fileData column here
+                        ")"
+        );
+
     }
 
     public boolean registerData(String name, String usn, String password) {
@@ -42,8 +53,6 @@ public class Database1 extends SQLiteOpenHelper {
 
         //Create contentValues; a string-builder-like function
         ContentValues contentValues = new ContentValues();
-
-
         contentValues.put("name", name);
         contentValues.put("usn", usn);
         contentValues.put("password", password);
@@ -77,12 +86,41 @@ public class Database1 extends SQLiteOpenHelper {
         return userRole;
     }
 
+    public boolean uploadData(String title, String description, byte[] fileData) {
+        // Open the database in writable mode to insert data
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+
+        // Create ContentValues for the data
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("title", title);
+        contentValues.put("description", description);
+        contentValues.put("fileData", fileData); // Store the file data as BLOB
+
+        // Insert data into the table
+        long res = sqLiteDatabase.insert("upload", null, contentValues);
+
+        sqLiteDatabase.close();
+        return res != -1;
+    }
+
+
+    public Cursor getNotesInfo() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM upload", null);
+    }
+
+
+
 
 
 
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+    public void onUpgrade(SQLiteDatabase db, int i, int i1) {
+        db.execSQL("DROP TABLE IF EXISTS " + register);
+        db.execSQL("DROP TABLE IF EXISTS " + "upload");
 
+
+        onCreate(db);
     }
 }
