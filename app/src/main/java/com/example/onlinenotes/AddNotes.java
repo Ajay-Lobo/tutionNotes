@@ -41,7 +41,7 @@ public class AddNotes extends AppCompatActivity {
         // Initialize UI elements
         titleText = findViewById(R.id.titleText);
         descriptionText = findViewById(R.id.descriptionText);
-        clearButton = findViewById(R.id.clearButton);
+  clearButton = findViewById(R.id.clearButton);
         uploadButton = findViewById(R.id.uploadButton);
         progressBar = findViewById(R.id.progressBar2);
 

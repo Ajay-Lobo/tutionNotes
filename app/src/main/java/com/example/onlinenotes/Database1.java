@@ -33,7 +33,7 @@ public class Database1 extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("" +
                 "INSERT INTO " + register + " " +
                 "(usn,name, password, role) VALUES " +
-                "('4SO22MC0091', 'harish','123456', 0)"
+                "('4SO22', 'harish','123456', 0)"
         );
 
         sqLiteDatabase.execSQL(

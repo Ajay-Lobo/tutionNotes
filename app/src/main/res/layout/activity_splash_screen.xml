@@ -19,11 +19,23 @@
         app:layout_constraintVertical_bias="0.392"
         app:srcCompat="@drawable/study1" />
 
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="377dp"
+        android:layout_height="388dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.918"
+        app:srcCompat="@drawable/text1" />
+
     <ProgressBar
         android:id="@+id/loaderProgressBar"
         style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

@@ -1,29 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="4dp"
-    app:cardUseCompatPadding="true">
+    android:layout_height="wrap_content">
 
-    <LinearLayout
+    <androidx.cardview.widget.CardView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="true">
 
-        <TextView
-            android:id="@+id/textViewTitle1"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <TextView
-            android:id="@+id/textViewDescription1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" />
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/textViewTitle1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewDescription1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" />
+
+            <!-- ImageView to display PDF or image -->
+            <ImageView
+                android:id="@+id/imageViewFile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/rounded_button"
+                android:scaleType="fitCenter" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

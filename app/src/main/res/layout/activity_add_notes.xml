@@ -2,112 +2,141 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".AddNotes">
 
-    <EditText
-        android:id="@+id/titleText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="204dp"
-        android:ems="10"
-        android:inputType="text"
-        android:hint="Title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <EditText
-        android:id="@+id/descriptionText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="108dp"
-        android:hint="Description"
-        android:ems="10"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleText" />
-
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
-        android:layout_marginEnd="56dp"
-        android:text="upload notes"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.381"
-
-        app:layout_constraintTop_toBottomOf="@+id/descriptionText" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="133dp"
-        android:layout_height="37dp"
-        android:layout_marginTop="84dp"
-        app:layout_constraintEnd_toStartOf="@+id/button5"
-        app:layout_constraintHorizontal_bias="0.636"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionText"
-
-        app:srcCompat="@drawable/rounded_button" />
-
-    <TextView
-        android:id="@+id/file_name_textview"
-        android:layout_width="153dp"
-        android:layout_height="50dp"
-        android:text="Selected File: "
-        tools:layout_editor_absoluteX="77dp"
-        tools:layout_editor_absoluteY="518dp"
-        android:visibility="gone"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.18"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
-    <Button
-        android:id="@+id/uploadButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="156dp"
-        android:layout_marginEnd="104dp"
-        android:text="Upload"
-        app:layout_constraintEnd_toStartOf="@+id/clearButton"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionText" />
-
-    <Button
-        android:id="@+id/clearButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="156dp"
-        android:layout_marginEnd="60dp"
-        android:text="Clear"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="323dp"
+        android:layout_height="613dp"
+        android:background="@drawable/bg_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionText"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <ProgressBar
-        android:id="@+id/progressBar2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="48dp"
-        android:progressTint="@color/blue"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.465"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleText"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.579">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="159dp"
+            android:layout_height="58dp"
+            android:text="UPLOAD"
+            android:textColor="@color/blue"
+            android:textSize="39sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/titleText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.397"
+            tools:ignore="TextSizeCheck" />
+
+        <EditText
+            android:id="@+id/titleText"
+            android:layout_width="254dp"
+            android:layout_height="53dp"
+            android:layout_marginTop="156dp"
+            android:ems="10"
+            android:hint="Title"
+            android:inputType="text"
+            android:textColor="@color/black"
+            android:textColorHint="#E83F4C51"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.254"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/descriptionText"
+            android:layout_width="253dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="68dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="Description"
+            android:inputType="textMultiLine"
+            android:textColor="@color/black"
+            android:textColorHint="#E83F4C51"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.258"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleText" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="24dp"
+            android:text="attachments"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/descriptionText" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="133dp"
+            android:layout_height="37dp"
+            android:layout_marginTop="52dp"
+            app:layout_constraintEnd_toStartOf="@+id/button5"
+            app:layout_constraintHorizontal_bias="0.557"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descriptionText" />
+
+        <TextView
+            android:id="@+id/file_name_textview"
+            android:layout_width="153dp"
+            android:layout_height="50dp"
+            android:text="Selected File: "
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.18"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2"
+            tools:layout_editor_absoluteX="77dp"
+            tools:layout_editor_absoluteY="518dp" />
+
+        <Button
+            android:id="@+id/uploadButton"
+            android:layout_width="203dp"
+            android:layout_height="57dp"
+            android:layout_marginTop="140dp"
+            android:text="Upload"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/descriptionText" />
+
+        <Button
+            android:id="@+id/clearButton"
+            android:layout_width="203dp"
+            android:layout_height="57dp"
+            android:layout_marginTop="156dp"
+            android:layout_marginEnd="60dp"
+            android:text="Clear"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descriptionText"
+
+            app:layout_constraintVertical_bias="0.8" />
+
+        <ProgressBar
+            android:id="@+id/progressBar2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="48dp"
+            android:progressTint="@color/blue"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.465"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleText"
+            tools:ignore="MissingConstraints" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

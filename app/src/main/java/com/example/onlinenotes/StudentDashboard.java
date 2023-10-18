@@ -1,5 +1,3 @@
-
-
 package com.example.onlinenotes;
         import androidx.appcompat.app.AppCompatActivity;
         import androidx.recyclerview.widget.LinearLayoutManager;
@@ -35,7 +33,7 @@ public class StudentDashboard extends AppCompatActivity {
             Toast.makeText(this, "No notes available.", Toast.LENGTH_SHORT).show();
         } else {
             // Create an adapter and set it to the RecyclerView
-            adapter = new NoteAdapter2(cursor);
+            adapter = new NoteAdapter2(cursor,this);
             recyclerView.setAdapter(adapter);
         }
     }

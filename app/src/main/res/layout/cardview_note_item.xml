@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp"
+    android:background="@color/white"
     app:cardUseCompatPadding="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:background="@color/white"
         android:padding="16dp">
 
         <TextView
             android:id="@+id/textViewTitle"
+            android:text="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="18sp"
@@ -24,24 +28,37 @@
             android:id="@+id/textViewDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@color/black"
             android:layout_marginTop="8dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/buttonDelete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Delete" />
 
-            <Button
-                android:id="@+id/buttonEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Edit" />
-        </LinearLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/buttonDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Delete"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.176"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:layout_editor_absoluteY="0dp" />
+
+                <Button
+                    android:id="@+id/buttonEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Edit"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.78"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:layout_editor_absoluteY="0dp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>
