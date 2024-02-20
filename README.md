@@ -1,6 +1,5 @@
 # tutionNotes
-this my first androud application
+this my first android application
 #java
 #xml
 #mysqlite
-#hello Floyden is here
